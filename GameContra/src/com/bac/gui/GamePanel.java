@@ -1,6 +1,6 @@
 package com.bac.gui;
 
-import com.bac.GameManager;
+import com.bac.manager.GameManager;
 import com.bac.model.Player;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ public class GamePanel  extends JPanel implements Runnable, KeyListener {
 
 
     public GamePanel(){
-        setBackground(Color.WHITE);
+        setBackground(Color.BLACK);
         manager.gameInit();
         setFocusable(true);
         addKeyListener(this);
@@ -49,14 +49,14 @@ public class GamePanel  extends JPanel implements Runnable, KeyListener {
     @Override
     public void run() {
         while (true){
-            if(flags[KeyEvent.VK_LEFT]&&flags[KeyEvent.VK_UP]) manager.playerMove(Player.LEFT_UP);
-            else if(flags[KeyEvent.VK_RIGHT]&&flags[KeyEvent.VK_UP])  manager.playerMove(Player.RIGHT_UP);
-            else if(flags[KeyEvent.VK_LEFT]&&flags[KeyEvent.VK_DOWN])  manager.playerMove(Player.LEFT_DOWN);
-            else if(flags[KeyEvent.VK_RIGHT]&&flags[KeyEvent.VK_DOWN])  manager.playerMove(Player.RIGHT_DOWN);
-            else if(flags[KeyEvent.VK_LEFT]) manager.playerMove(Player.LEFT);
-            else if(flags[KeyEvent.VK_RIGHT]) manager.playerMove(Player.RIGHT);
+            if(flags[KeyEvent.VK_LEFT]&&flags[KeyEvent.VK_UP]) manager.move(Player.LEFT_UP);
+            else if(flags[KeyEvent.VK_RIGHT]&&flags[KeyEvent.VK_UP])  manager.move(Player.RIGHT_UP);
+            else if(flags[KeyEvent.VK_LEFT]&&flags[KeyEvent.VK_DOWN])  manager.move(Player.LEFT_DOWN);
+            else if(flags[KeyEvent.VK_RIGHT]&&flags[KeyEvent.VK_DOWN])  manager.move(Player.RIGHT_DOWN);
+            else if(flags[KeyEvent.VK_LEFT]) manager.move(Player.LEFT);
+            else if(flags[KeyEvent.VK_RIGHT]) manager.move(Player.RIGHT);
             try {
-                Thread.sleep(10);
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

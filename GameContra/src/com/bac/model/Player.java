@@ -1,5 +1,6 @@
 package com.bac.model;
 
+import com.bac.gui.GameFrame;
 import com.bac.until.ImageLoader;
 
 import java.awt.*;
@@ -12,6 +13,8 @@ public class Player {
     public static final int LEFT_DOWN =4;
     public static final int RIGHT_DOWN =5;
     public static final int JUMP =6;
+    public static final int JUMP_LEFT =7;
+    public static final int JUMP_RIGHT =7;
 
     private int x;
     private int y;
@@ -68,8 +71,24 @@ public class Player {
             ImageLoader.getImage("bill_run_down_right_3.png",getClass())
     };
 
+    Image jumpRight [] = {
+            ImageLoader.getImage("bill_jump_right_1.png",getClass()),
+            ImageLoader.getImage("bill_jump_right_2.png",getClass()),
+            ImageLoader.getImage("bill_jump_right_3.png",getClass()),
+            ImageLoader.getImage("bill_jump_right_4.png",getClass())
+    };
 
-    Image images [][] = {left,right,leftUp,rightUp,leftDown,rightDown};
+    Image jumpLeft [] = {
+            ImageLoader.getImage("bill_jump_left_1.png",getClass()),
+            ImageLoader.getImage("bill_jump_left_2.png",getClass()),
+            ImageLoader.getImage("bill_jump_left_3.png",getClass()),
+            ImageLoader.getImage("bill_jump_left_4.png",getClass())
+    };
+
+
+
+
+    Image images [][] = {left,right,leftUp,rightUp,leftDown,rightDown,jumpLeft,jumpRight};
 
 
     public void draw(Graphics2D g2d){
@@ -81,13 +100,15 @@ public class Player {
             case LEFT:
             case LEFT_UP:
             case LEFT_DOWN:
-                x--;
+                if(x>0) x--;
                 break;
             case RIGHT:
             case RIGHT_UP:
             case RIGHT_DOWN:
-                x++;
+                if(x<GameFrame.WIDTH-20) x++;
                 break;
+            case JUMP_LEFT:
+                y--;
         }
     }
 
@@ -111,5 +132,7 @@ public class Player {
         }
     }
 
-
+    public int getX() {
+        return x;
+    }
 }
