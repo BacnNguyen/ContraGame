@@ -5,6 +5,7 @@ import com.bac.model.Map;
 import com.bac.model.Player;
 
 import java.awt.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class GameManager {
@@ -39,11 +40,14 @@ public class GameManager {
         for (int i = 0; i < maps.size(); i++) {
             maps.get(i).move(newOrient);
         }
+        System.out.println();
     }
 
     public void move(int newOrient) {
-        Map map = maps.get(0);
+        Map map = maps.get(Map.step);
+        if(!map.checkTouchLeft()) Map.step++;
         Map map1 = maps.get(maps.size() - 1);
+
         if (map.checkTouchLeft() &&
                 (newOrient == Player.LEFT || newOrient == Player.LEFT_UP || newOrient == Player.LEFT_DOWN)) {
             playerMove(newOrient);

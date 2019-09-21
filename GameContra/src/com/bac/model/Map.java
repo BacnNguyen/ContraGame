@@ -6,6 +6,7 @@ import com.bac.until.ImageLoader;
 import java.awt.*;
 
 public class Map {
+    public static int step=0;
     private int x;
     private int y;
     private int bit;
@@ -36,11 +37,12 @@ public class Map {
 
     public void move(int orient) {
         switch (orient) {
-//            case Player.LEFT:
-//            case Player.LEFT_DOWN:
-//            case Player.LEFT_UP:
-//                x++;
-//                break;
+            case Player.LEFT:
+            case Player.LEFT_DOWN:
+            case Player.LEFT_UP:
+                x++;
+                break;
+
             case Player.RIGHT:
             case Player.RIGHT_DOWN:
             case Player.RIGHT_UP:
@@ -50,12 +52,16 @@ public class Map {
     }
 
     public boolean checkTouchLeft(){
-        if(x==0) return true;
+        if(x<=0) return true;
         else return false;
     }
 
     public boolean checkTouchRight(){
         if(x== GameFrame.WIDTH) return true;
         else return false;
+    }
+
+    public int getX() {
+        return x;
     }
 }

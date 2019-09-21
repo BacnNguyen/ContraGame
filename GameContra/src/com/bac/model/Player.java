@@ -107,7 +107,7 @@ public class Player {
             case RIGHT_DOWN:
                 if(x<GameFrame.WIDTH-20) x++;
                 break;
-            case JUMP_LEFT:
+            case JUMP_RIGHT:
                 y--;
         }
     }
@@ -134,5 +134,10 @@ public class Player {
 
     public int getX() {
         return x;
+    }
+
+
+    public void jump(){
+
     }
 }

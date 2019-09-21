@@ -55,6 +55,7 @@ public class GamePanel  extends JPanel implements Runnable, KeyListener {
             else if(flags[KeyEvent.VK_RIGHT]&&flags[KeyEvent.VK_DOWN])  manager.move(Player.RIGHT_DOWN);
             else if(flags[KeyEvent.VK_LEFT]) manager.move(Player.LEFT);
             else if(flags[KeyEvent.VK_RIGHT]) manager.move(Player.RIGHT);
+            else if(flags[KeyEvent.VK_SPACE]) manager.move(Player.JUMP_RIGHT);
             try {
                 Thread.sleep(1);
             } catch (InterruptedException e) {

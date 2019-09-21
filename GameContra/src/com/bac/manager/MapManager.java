@@ -36,7 +36,6 @@ public class MapManager {
                 int bit = Integer.parseInt(line.charAt(j) + "");
                 Map map = new Map(j * w, i * h, bit);
                 maps.add(map);
-                System.out.print(bit+" ");
             }
             System.out.println();
             i++;
