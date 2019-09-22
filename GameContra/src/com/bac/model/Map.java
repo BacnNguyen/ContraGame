@@ -64,4 +64,22 @@ public class Map {
     public int getX() {
         return x;
     }
+
+    public int getBit() {
+        return bit;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Rectangle getRect(){
+        Rectangle rect = new Rectangle(x,y,images[bit].getWidth(null),10);
+        return rect;
+    }
+
+    public void drawRect(Graphics2D g2d){
+        g2d.setStroke(new BasicStroke(3));
+        g2d.drawRect(x,y,32,5);
+    }
 }

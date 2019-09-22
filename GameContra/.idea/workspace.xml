@@ -41,13 +41,18 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/images" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Admin\Desktop\Bac\Game\GameContra\GameContra\src\images" />
+      <recent name="C:\Users\Admin\Desktop\Bac\Game\GameContra\GameContra\src\map" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Admin\Desktop\Bac\Game\GameContra\GameContra\src\images" />
       <recent name="C:\Users\admin\Desktop\KhoGithub\GameContra\GameContra\src\map" />
       <recent name="C:\Users\admin\Desktop\KhoGithub\GameContra\GameContra\src\images" />
     </key>
@@ -99,11 +104,10 @@
       <workItem from="1568971415410" duration="4262000" />
       <workItem from="1568985880087" duration="1926000" />
       <workItem from="1569031564254" duration="6439000" />
+      <workItem from="1569054693992" duration="20789000" />
+      <workItem from="1569116790606" duration="13006000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14185000" />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -113,7 +117,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

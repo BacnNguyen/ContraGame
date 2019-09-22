@@ -4,6 +4,7 @@ import com.bac.gui.GameFrame;
 import com.bac.until.ImageLoader;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Player {
     public static final int LEFT =0;
@@ -12,15 +13,25 @@ public class Player {
     public static final int RIGHT_UP =3;
     public static final int LEFT_DOWN =4;
     public static final int RIGHT_DOWN =5;
-    public static final int JUMP =6;
-    public static final int JUMP_LEFT =7;
+    public static final int JUMP_LEFT =6;
     public static final int JUMP_RIGHT =7;
+    public static final int FIRE_DOWN =8;
+    public static final int FIRE_RIGHT = 9;
+    public static final int FIRE_LEFT = 10;
+    public static final int FIRE_STAND_LEFT = 11;
+    public static final int FIRE_STAND_RIGHT = 12;
+    public static final int FIRE_UP = 13;
+    public static final int FIRE_LIE_LEFT = 14;
+    public static final int FIRE_LIE_RIGHT = 15;
 
     private int x;
     private int y;
     private int orient;
     private int count;
     private int index;
+    private int jumpStep;
+    private boolean isFall = false;
+    private int ground;
 
     public Player(int x, int y) {
         this.x = x;
@@ -86,9 +97,48 @@ public class Player {
     };
 
 
+    Image fireRight [] = {
+            ImageLoader.getImage("bill_run_fire_right_1.png",getClass()),
+            ImageLoader.getImage("bill_run_fire_right_2.png",getClass()),
+            ImageLoader.getImage("bill_run_fire_right_3.png",getClass())
+    };
+
+    Image fireLeft [] = {
+            ImageLoader.getImage("bill_run_fire_left_1.png",getClass()),
+            ImageLoader.getImage("bill_run_fire_left_2.png",getClass()),
+            ImageLoader.getImage("bill_run_fire_left_3.png",getClass())
+    };
+
+    Image fireStandLeft [] = {
+            ImageLoader.getImage("bill_run_fire_right_1.png",getClass())
+    };
+
+    Image fireStandRight [] = {
+            ImageLoader.getImage("bill_run_fire_right_1.png",getClass())
+    };
+
+    Image fireUp [] = {
+            ImageLoader.getImage("bill_fire_up_right.png",getClass())
+    };
+
+    Image fireLieRight [] = {
+            ImageLoader.getImage("bill_lie_fire_right.png",getClass())
+    };
+
+    Image fireLieLeft [] = {
+        ImageLoader.getImage("bill_lie_fire_left.png",getClass())
+    };
+
+    Image fireDown [] = {
+            ImageLoader.getImage("bill_jump_right_1.png",getClass()),
+            ImageLoader.getImage("bill_jump_right_2.png",getClass()),
+            ImageLoader.getImage("bill_jump_right_3.png",getClass())
+    };
 
 
-    Image images [][] = {left,right,leftUp,rightUp,leftDown,rightDown,jumpLeft,jumpRight};
+    Image images [][] = {left,right,leftUp,rightUp,leftDown,rightDown,
+            jumpLeft,jumpRight,fireDown,fireRight,fireLeft,fireStandLeft,
+            fireStandRight,fireUp,fireLieLeft,fireLieRight};
 
 
     public void draw(Graphics2D g2d){
@@ -108,9 +158,17 @@ public class Player {
                 if(x<GameFrame.WIDTH-20) x++;
                 break;
             case JUMP_RIGHT:
-                y--;
+                x++;
+                break;
+            case JUMP_LEFT:
+                x--;
+                break;
+            case FIRE_DOWN:
+                jump();
+                break;
         }
     }
+
 
 
     public void changeOrient(int newOrient){
@@ -132,12 +190,64 @@ public class Player {
         }
     }
 
+    public Rectangle getRect() {
+        int w= images[orient][index].getWidth(null);
+        int h = images[orient][index].getHeight(null);
+        Rectangle rect = new Rectangle(x+2,y+h-3,w-4,3);
+        return rect;
+    }
+
     public int getX() {
         return x;
     }
 
 
-    public void jump(){
+    public boolean checkTouchMap(ArrayList<Map> arr){
+        for (Map m:arr) {
+            if(m.getBit()==4||m.getBit()==7||m.getBit()==8) {
+                Rectangle rect = getRect().intersection(m.getRect());
+                if(!rect.isEmpty()){
+                    y = m.getY()-images[orient][index].getHeight(null);
+                    return true;
+                }
+                else continue;
+            }else continue;
+        }
+        return false;
+    }
 
+    public void jump (){
+         if(!isFall) jumpStep = 50;
+        ground = y;
+    }
+
+
+    public boolean checkDie(){
+        if(y>=GameFrame.HEIGHT) return true;
+        else return false;
+    }
+
+
+    public void fall(ArrayList<Map> arr){
+        if(checkTouchMap(arr)==false&&jumpStep ==0){
+            y++;
+            isFall = true;
+            if(y == ground+5) orient = RIGHT;
+        }
+        else if (jumpStep>0){
+            y-=2;jumpStep--;
+            isFall = true;
+        }
+        else {
+            isFall = false;
+        }
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public  int getOrient() {
+        return orient;
     }
 }
