@@ -17,13 +17,14 @@ public class Map {
         this.x = x;
         this.y = y;
         this.bit = bit;
-        images = new Image[9];
+        images = new Image[10];
 
         images[0] = ImageLoader.getImage("sky.png", getClass());
         images[1] = ImageLoader.getImage("water.png", getClass());
         images[2] = ImageLoader.getImage("tree_1.png", getClass());
         images[3] = ImageLoader.getImage("tree_2.png", getClass());
         images[4] = ImageLoader.getImage("ground.png", getClass());
+        images[9] = ImageLoader.getImage("ground.png", getClass());
         images[5] = ImageLoader.getImage("under_1.png", getClass());
         images[6] = ImageLoader.getImage("under_2.png", getClass());
         images[7] = ImageLoader.getImage("bridge_1.png", getClass());

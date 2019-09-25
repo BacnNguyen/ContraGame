@@ -1,17 +1,21 @@
 package com.bac.manager;
 
+import com.bac.model.Boss;
 import com.bac.model.Map;
-import com.bac.until.ImageLoader;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MapManager {
     public static int w = 32;
     public static int h = 16;
+    private ArrayList<Map> maps;
+    private ArrayList<Boss> arrBoss;
 
-    public static ArrayList<Map> getMap(String name) {
-        ArrayList<Map> maps = new ArrayList<>();
+    public MapManager(String name) {
+        maps = new ArrayList<>();
+        arrBoss = new ArrayList<>();
         File file = new File("src/map/" + name);
         BufferedReader buff = null;
         try {
@@ -19,8 +23,6 @@ public class MapManager {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-
 
         int i = 0;
         String line = null;
@@ -34,10 +36,13 @@ public class MapManager {
         while (line != null) {
             for (int j = 0; j < line.length(); j++) {
                 int bit = Integer.parseInt(line.charAt(j) + "");
+                if (bit == 9) {
+                    Boss b = new Boss(j * w, i * h-15, new Random().nextInt(4));
+                    arrBoss.add(b);
+                }
                 Map map = new Map(j * w, i * h, bit);
                 maps.add(map);
             }
-            System.out.println();
             i++;
             try {
                 line = buff.readLine();
@@ -45,6 +50,13 @@ public class MapManager {
                 e.printStackTrace();
             }
         }
+    }
+
+    public ArrayList<Map> getMap() {
         return maps;
+    }
+
+    public ArrayList<Boss> getBoss() {
+        return arrBoss;
     }
 }

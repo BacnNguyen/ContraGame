@@ -47,14 +47,14 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Admin\Desktop\Bac\Game\GameContra\GameContra\src\images" />
-      <recent name="C:\Users\Admin\Desktop\Bac\Game\GameContra\GameContra\src\map" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Admin\Desktop\Bac\Game\GameContra\GameContra\src\images" />
       <recent name="C:\Users\admin\Desktop\KhoGithub\GameContra\GameContra\src\map" />
       <recent name="C:\Users\admin\Desktop\KhoGithub\GameContra\GameContra\src\images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Admin\Desktop\Bac\Game\GameContra\GameContra\src\images" />
+      <recent name="C:\Users\Admin\Desktop\Bac\Game\GameContra\GameContra\src\map" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -106,6 +106,8 @@
       <workItem from="1569031564254" duration="6439000" />
       <workItem from="1569054693992" duration="20789000" />
       <workItem from="1569116790606" duration="13006000" />
+      <workItem from="1569374691488" duration="239000" />
+      <workItem from="1569385746916" duration="21779000" />
     </task>
     <servers />
   </component>

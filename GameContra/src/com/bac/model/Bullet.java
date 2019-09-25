@@ -25,7 +25,7 @@ public class Bullet {
 
 
     public void move() {
-        switch (orient) {
+        switch (this.orient) {
             case Player.RIGHT:
                 x++;
                 break;
@@ -58,8 +58,18 @@ public class Bullet {
         }
     }
 
+    public void move(int newOrient){
+        if(orient==Player.LEFT||orient==Player.LEFT_UP||orient==Player.LEFT_DOWN) x--;
+    }
+
     public boolean checkTouch() {
         if (x <= 0 || x >= GameFrame.WIDTH || y <= 0 || y >= GameFrame.HEIGHT) return true;
         else return false;
+    }
+
+    public Rectangle getRect(){
+        return new Rectangle(x,y,
+                img[0].getWidth(null),
+                img[0].getHeight(null));
     }
 }

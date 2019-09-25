@@ -24,14 +24,14 @@ public class Player {
     public static final int FIRE_LIE_LEFT = 14;
     public static final int FIRE_LIE_RIGHT = 15;
 
-    private int x;
-    private int y;
-    private int orient;
-    private int count;
-    private int index;
-    private int jumpStep;
-    private boolean isFall = false;
-    private int ground;
+    protected int x;
+    protected int y;
+    protected int orient;
+    protected int count;
+    protected int index;
+    protected int jumpStep;
+    protected boolean isFall = false;
+    protected int ground;
 
     public Player(int x, int y) {
         this.x = x;
@@ -197,6 +197,13 @@ public class Player {
         return rect;
     }
 
+    public Rectangle getRectAllBody() {
+        int w= images[orient][index].getWidth(null);
+        int h = images[orient][index].getHeight(null);
+        Rectangle rect = new Rectangle(x,y,w,h);
+        return rect;
+    }
+
     public int getX() {
         return x;
     }
@@ -243,11 +250,27 @@ public class Player {
         }
     }
 
+    public boolean checkTouchBullet(ArrayList<Bullet> arr){
+        for (Bullet b:arr) {
+            Rectangle rect = getRectAllBody().intersection(b.getRect());
+            if(!rect.isEmpty()) {
+                arr.remove(b);
+                return true;// if return true, player touched bullet
+            }
+        }
+        return false;
+    }
+
     public int getY() {
         return y;
     }
 
     public  int getOrient() {
         return orient;
+    }
+
+    public void setXY(int x, int y){
+        this.x = x;
+        this.y = y;
     }
 }
