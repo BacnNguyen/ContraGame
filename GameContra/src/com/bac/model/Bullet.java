@@ -27,9 +27,13 @@ public class Bullet {
     public void move() {
         switch (this.orient) {
             case Player.RIGHT:
+                case Player.FIRE_RIGHT:
+                    case Player.FIRE_LIE_RIGHT:
                 x++;
                 break;
             case Player.LEFT:
+                case Player.FIRE_LEFT:
+                    case Player.FIRE_LIE_LEFT:
                 x--;
                 break;
             case Player.LEFT_DOWN:

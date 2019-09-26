@@ -150,11 +150,13 @@ public class Player {
             case LEFT:
             case LEFT_UP:
             case LEFT_DOWN:
+            case FIRE_LEFT:
                 if(x>0) x--;
                 break;
             case RIGHT:
             case RIGHT_UP:
             case RIGHT_DOWN:
+            case FIRE_RIGHT:
                 if(x<GameFrame.WIDTH-20) x++;
                 break;
             case JUMP_RIGHT:

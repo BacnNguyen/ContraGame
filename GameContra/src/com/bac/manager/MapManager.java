@@ -15,7 +15,7 @@ public class MapManager {
 
     public MapManager(String name) {
         maps = new ArrayList<>();
-        arrBoss = new ArrayList<>();
+        arrBoss = new ArrayList<Boss>();
         File file = new File("src/map/" + name);
         BufferedReader buff = null;
         try {

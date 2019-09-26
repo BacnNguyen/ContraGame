@@ -17,7 +17,7 @@ public class Map {
         this.x = x;
         this.y = y;
         this.bit = bit;
-        images = new Image[10];
+        images = new Image[11];
 
         images[0] = ImageLoader.getImage("sky.png", getClass());
         images[1] = ImageLoader.getImage("water.png", getClass());
@@ -29,6 +29,7 @@ public class Map {
         images[6] = ImageLoader.getImage("under_2.png", getClass());
         images[7] = ImageLoader.getImage("bridge_1.png", getClass());
         images[8] = ImageLoader.getImage("bridge_2.png", getClass());
+        images[10] = ImageLoader.getImage("anh.png",getClass());
     }
 
 

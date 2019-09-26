@@ -2,6 +2,7 @@ package com.bac.manager;
 
 import com.bac.gui.GameFrame;
 import com.bac.model.*;
+import com.bac.until.ImageLoader;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Random;
 public class GameManager {
     private ArrayList<Life> lifes;
     private Player player;
+
     private ArrayList<Map> maps;
     private ArrayList<Bullet> bulletsPlayer;
     private ArrayList<Bullet> bulletsBoss;
@@ -17,6 +19,7 @@ public class GameManager {
     MapManager mapManager ;
     private int fireCount;
     private int score;
+
 
     public void gameInit() {
         mapManager = new MapManager("map1.txt");
@@ -34,6 +37,9 @@ public class GameManager {
         lifes.add(new Life(20,10));
         lifes.add(new Life(50,10));
         lifes.add(new Life(80,10));
+        lifes.add(new Life(110,10));
+        lifes.add(new Life(140,10));
+        lifes.add(new Life(170,10));
     }
 
 
@@ -55,7 +61,8 @@ public class GameManager {
 //    }
 
 
-    public void fire(int orient) {
+    public void fire() {
+        int orient = player.getOrient();
         fireCount++;
         if (fireCount >= 20) {
             switch (orient) {
@@ -91,6 +98,22 @@ public class GameManager {
                     Bullet bullet7 = new Bullet(player.getX() + 7, player.getY() + 3, orient);
                     bulletsPlayer.add(bullet7);
                     break;
+                case Player.FIRE_LEFT:
+                    Bullet bullet8 = new Bullet(player.getX() , player.getY() , orient);
+                    bulletsPlayer.add(bullet8);
+                    break;
+                case Player.FIRE_RIGHT:
+                    Bullet bullet9 = new Bullet(player.getX() , player.getY() +1, orient);
+                    bulletsPlayer.add(bullet9);
+                    break;
+                case Player.FIRE_LIE_RIGHT:
+                    Bullet bullet10 = new Bullet(player.getX()+1 , player.getY() +1, orient);
+                    bulletsPlayer.add(bullet10);
+                    break;
+                case Player.FIRE_LIE_LEFT:
+                    Bullet bullet11 = new Bullet(player.getX()+2 , player.getY() +1, orient);
+                    bulletsPlayer.add(bullet11);
+                    break;
             }
 
             fireCount = 0;
@@ -112,12 +135,12 @@ public class GameManager {
     }
 
     public void moveBullet(){
-        for (int i = 0; i < bulletsPlayer.size(); i++) {
+        for (int i = bulletsPlayer.size()-1; i >=0; i--) {
             bulletsPlayer.get(i).move();
             if (bulletsPlayer.get(i).checkTouch()) bulletsPlayer.remove(i);
         }
 
-        for (int i = 0; i < bulletsBoss.size(); i++) {
+        for (int i = bulletsBoss.size()-1;i>=0; i--) {
             bulletsBoss.get(i).move();
             if (bulletsBoss.get(i).checkTouch()) bulletsBoss.remove(i);
         }
@@ -128,13 +151,12 @@ public class GameManager {
         for (Map map : maps) {
             map.draw(g2d);
         }
-        player.draw(g2d);
-        for (Bullet b : bulletsPlayer) {
-            b.draw(g2d);
-        }
 
-        for (Bullet b:bulletsBoss) {
-            b.draw(g2d);
+
+        if(bulletsBoss.size()>0){
+            for (Bullet b:bulletsBoss) {
+                b.draw(g2d);
+            }
         }
         for (int i = 0; i <arrBoss.size() ; i++) {
             arrBoss.get(i).draw(g2d);
@@ -144,7 +166,11 @@ public class GameManager {
         }
         g2d.setColor(Color.CYAN);
         g2d.setFont(new Font("Arial",Font.BOLD,20));
-        g2d.drawString("SCORE :"+score,120,30);
+        g2d.drawString("SCORE :"+score,600,30);
+        player.draw(g2d);
+        for (Bullet b : bulletsPlayer) {
+            b.draw(g2d);
+        }
     }
 
     public void playerMove(int newOrient) {
@@ -154,12 +180,23 @@ public class GameManager {
     }
 
     public void playerMove1(int newOrient) {
+        if (newOrient == Player.FIRE_LIE_RIGHT || newOrient == Player.FIRE_LIE_LEFT) {
+            int playerOrient = player.getOrient();
+            if (playerOrient == Player.RIGHT||
+                    playerOrient == Player.RIGHT_DOWN||
+                    playerOrient == Player.RIGHT_UP||
+                    playerOrient==Player.FIRE_RIGHT) {
+                newOrient = Player.FIRE_LIE_RIGHT;
+            }
+            else if(playerOrient==Player.LEFT||
+                    playerOrient==Player.LEFT_DOWN||
+                    playerOrient==Player.LEFT_UP||
+                    playerOrient==Player.FIRE_LEFT){
+                newOrient = Player.FIRE_LIE_LEFT;
+            }
+        }
         player.changeOrient(newOrient);
         player.changeImage();
-        if (newOrient == Player.FIRE_LIE_RIGHT || newOrient == Player.FIRE_LIE_LEFT) {
-            if (player.getOrient() == Player.RIGHT) newOrient = Player.FIRE_LIE_RIGHT;
-            else newOrient = Player.FIRE_LIE_LEFT;
-        }
     }
 
 
